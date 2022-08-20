@@ -1,0 +1,56 @@
+{% extends  'base.html' %}
+{% load crispy_forms_tags %}
+
+
+{% block title %}
+    <title>ADD BOOK</title>
+    {% endblock %}
+
+
+
+    {% block content %}
+    <table class="table table-dark text-center">
+        <thead>
+          <tr>
+            <th scope="col">BOOK ID</th>
+            <th scope="col">NAME</th>
+            <th scope="col">AUTHER</th>
+            
+            <th scope="col">PRICE</th>
+            <th scope="col">UPDATE</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+            {% for i in obj %}
+          <tr>
+            
+            <td>{{i.bid}}</td>
+            <td>{{i.name}}</td>
+            <td>{{i.author}}</td>
+           
+            
+            <td>{{i.price}}</td>
+            <td><button class="btn btn-warning btn-sm"><a href="{% url 'update_url' i.id%}">UPDATE</a></button></td>
+            
+            
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+      <div class="pagination justify-content-center">
+        {% if obj.has_previous %}
+        <a href="{% url 'show_url' %}?page={{obj.previous_page_number}}">Previous</a>
+        {% endif %}
+    
+    <span> 
+      page{{obj.number}} of {{obj.paginator.num_pages}}
+    </span>
+    
+        {% if obj.has_next %}
+        <a href="{% url 'show_url' %}?page={{obj.next_page_number}}">Next</a>
+        {% endif %}
+    
+      </div>
+    {% endblock %}
